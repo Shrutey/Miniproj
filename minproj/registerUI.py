@@ -317,61 +317,62 @@ class Ui_Form(object):
         login_window.show()'''
  
 # Add the register_button.clicked.connect method to call the register_user function
-def register_user(self):
-    # Function to register a new user
-    first_name = self.first_name.text()
-    last_name = self.last_name.text()
-    email = self.email.text()
-    password = self.password.text()
-    confirm_password = self.cfpassword.text()
-    user_type = self.selectuser.currentText()  # Assuming 'Faculty' or 'Student'
-    self.register_button.clicked.connect(self.register_user)
-    # Check if any field is empty
-    if not (first_name and last_name and email and password and confirm_password):
-        QtWidgets.QMessageBox.warning(self, "Error", "Please fill in all fields.")  # Use self instead of Form
-        return
+    def register_user(self):
+        # Function to register a new user
+        first_name = self.first_name.text()
+        last_name = self.last_name.text()
+        email = self.email.text()
+        password = self.password.text()
+        confirm_password = self.cfpassword.text()
+        user_type = self.selectuser.currentText()  # Assuming 'Faculty' or 'Student'
 
-    # Check if password and confirm password match
-    if password != confirm_password:
-        QtWidgets.QMessageBox.warning(self, "Error", "Passwords do not match.")  # Use self instead of Form
-        return
+        # Check if any field is empty
+        if not (first_name and last_name and email and password and confirm_password):
+            QtWidgets.QMessageBox.warning(self.widget, "Error", "Please fill in all fields.")
+            return
+
+        # Check if password and confirm password match
+        if password != confirm_password:
+            QtWidgets.QMessageBox.warning(self.widget, "Error", "Passwords do not match.")
+            return
+
         # Connect to the database
-    conn = sqlite3.connect('timetable.db')
-    cursor = conn.cursor()
+        conn = sqlite3.connect('timetable.db')
+        cursor = conn.cursor()
 
-    
-    try:
-        # Insert user data into the database
-        cursor.execute('''
-            INSERT INTO Users (username, password_hash, first_name, last_name, email)
-            VALUES (?, ?, ?, ?, ?)
-        ''', (email, password, first_name, last_name, email))
+        try:
+            # Insert user data into the database
+            cursor.execute('''
+                INSERT INTO Users (username, password_hash, first_name, last_name, email)
+                VALUES (?, ?, ?, ?, ?)
+            ''', (email, password, first_name, last_name, email))
 
-        # Commit changes
-        conn.commit()
+            # Commit changes
+            conn.commit()
 
-        # Optionally, display a message box indicating successful registration
-        QtWidgets.QMessageBox.information(self, "Success", "Registration successful!")
+            # Optionally, display a message box indicating successful registration
+            QtWidgets.QMessageBox.information(self.widget, "Success", "Registration successful!")
 
-        # Clear input fields after registration
-        self.first_name.clear()
-        self.last_name.clear()
-        self.email.clear()
-        self.password.clear()
-        self.cfpassword.clear()
+            # Clear input fields after registration
+            self.first_name.clear()
+            self.last_name.clear()
+            self.email.clear()
+            self.password.clear()
+            self.cfpassword.clear()
 
-        # Optionally, switch to the login window after successful registration
-        login_window = LoginWindow()  # Assuming LoginWindow is defined somewhere
-        Form.hide()
-        login_window.show()
+            # Optionally, switch to the login window after successful registration
+            # login_window = LoginWindow()  # Assuming LoginWindow is defined somewhere
+            # self.Form.hide()
+            # login_window.show()
 
-    except sqlite3.Error as e:
-        # Handle database errors
-        QtWidgets.QMessageBox.warning(self, "Error", "Database error: " + str(e))
+        except sqlite3.Error as e:
+            # Handle database errors
+            QtWidgets.QMessageBox.warning(self.widget, "Error", "Database error: " + str(e))
 
-    finally:
-        # Close the database connection
-        conn.close()
+        finally:
+            # Close the database connection
+            conn.close()
+
 
 
 if __name__ == "__main__":
