@@ -1,7 +1,6 @@
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-import resource, sys 
-
+import resource, sys
+import sqlite3
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -19,19 +18,19 @@ class Ui_Form(object):
         self.logo = QtWidgets.QLabel(self.widget)
         self.logo.setGeometry(QtCore.QRect(0, 0, 380, 600))
         self.logo.setStyleSheet("border-image:url(:/images/logo.png);\n"
-"border-top-left-radius:30px;\n"
-"border-bottom-left-radius:30px;\n"
-"\n"
-"background-color: gba(0, 0, 0,80);")
+                                "border-top-left-radius:30px;\n"
+                                "border-bottom-left-radius:30px;\n"
+                                "\n"
+                                "background-color: gba(0, 0, 0,80);")
         self.logo.setText("")
         self.logo.setObjectName("logo")
         self.white_label = QtWidgets.QLabel(self.widget)
         self.white_label.setGeometry(QtCore.QRect(379, -1, 520, 600))
         self.white_label.setStyleSheet("\n"
-"background-color: rgb(255, 255, 240);\n"
-"\n"
-"    border-bottom-right-radius: 30px;\n"
-"    border-top-right-radius: 30px;")
+                                       "background-color: rgb(255, 255, 240);\n"
+                                       "\n"
+                                       "    border-bottom-right-radius: 30px;\n"
+                                       "    border-top-right-radius: 30px;")
         self.white_label.setText("")
         self.white_label.setObjectName("white_label")
         self.register_2 = QtWidgets.QLabel(self.widget)
@@ -50,11 +49,11 @@ class Ui_Form(object):
         font.setPointSize(11)
         self.first_name.setFont(font)
         self.first_name.setStyleSheet("background-color: rgba(0, 0, 0, 0);\n"
-"border:none;\n"
-"border-bottom:2px solid qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(44, 42, 42, 255), stop:0.5 rgba(7, 46, 51, 255), stop:1 rgba(12, 112, 117, 255));\n"
-"    \n"
-"color:rgba(0, 0, 0, 240);\n"
-"padding-bottom:7px;")
+                                      "border:none;\n"
+                                      "border-bottom:2px solid qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(44, 42, 42, 255), stop:0.5 rgba(7, 46, 51, 255), stop:1 rgba(12, 112, 117, 255));\n"
+                                      "    \n"
+                                      "color:rgba(0, 0, 0, 240);\n"
+                                      "padding-bottom:7px;")
         self.first_name.setText("")
         self.first_name.setObjectName("first_name")
         self.email = QtWidgets.QLineEdit(self.widget)
@@ -64,11 +63,11 @@ class Ui_Form(object):
         font.setPointSize(11)
         self.email.setFont(font)
         self.email.setStyleSheet("background-color: rgba(0, 0, 0, 0);\n"
-"border:none;\n"
-"border-bottom:2px solid qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(44, 42, 42, 255), stop:0.5 rgba(7, 46, 51, 255), stop:1 rgba(12, 112, 117, 255));\n"
-"    \n"
-"color:rgba(0, 0, 0, 240);\n"
-"padding-bottom:7px;")
+                                 "border:none;\n"
+                                 "border-bottom:2px solid qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(44, 42, 42, 255), stop:0.5 rgba(7, 46, 51, 255), stop:1 rgba(12, 112, 117, 255));\n"
+                                 "    \n"
+                                 "color:rgba(0, 0, 0, 240);\n"
+                                 "padding-bottom:7px;")
         self.email.setText("")
         self.email.setEchoMode(QtWidgets.QLineEdit.Normal)
         self.email.setReadOnly(False)
@@ -81,11 +80,11 @@ class Ui_Form(object):
         font.setPointSize(11)
         self.last_name.setFont(font)
         self.last_name.setStyleSheet("background-color: rgba(0, 0, 0, 0);\n"
-"border:none;\n"
-"border-bottom:2px solid qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(44, 42, 42, 255), stop:0.5 rgba(7, 46, 51, 255), stop:1 rgba(12, 112, 117, 255));\n"
-"    \n"
-"color:rgba(0, 0, 0, 240);\n"
-"padding-bottom:7px;")
+                                     "border:none;\n"
+                                     "border-bottom:2px solid qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(44, 42, 42, 255), stop:0.5 rgba(7, 46, 51, 255), stop:1 rgba(12, 112, 117, 255));\n"
+                                     "    \n"
+                                     "color:rgba(0, 0, 0, 240);\n"
+                                     "padding-bottom:7px;")
         self.last_name.setText("")
         self.last_name.setObjectName("last_name")
         self.password = QtWidgets.QLineEdit(self.widget)
@@ -95,11 +94,11 @@ class Ui_Form(object):
         font.setPointSize(11)
         self.password.setFont(font)
         self.password.setStyleSheet("background-color: rgba(0, 0, 0, 0);\n"
-"border:none;\n"
-"border-bottom:2px solid qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(44, 42, 42, 255), stop:0.5 rgba(7, 46, 51, 255), stop:1 rgba(12, 112, 117, 255));\n"
-"    \n"
-"color:rgba(0, 0, 0, 240);\n"
-"padding-bottom:7px;")
+                                    "border:none;\n"
+                                    "border-bottom:2px solid qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(44, 42, 42, 255), stop:0.5 rgba(7, 46, 51, 255), stop:1 rgba(12, 112, 117, 255));\n"
+                                    "    \n"
+                                    "color:rgba(0, 0, 0, 240);\n"
+                                    "padding-bottom:7px;")
         self.password.setText("")
         self.password.setEchoMode(QtWidgets.QLineEdit.Password)
         self.password.setObjectName("password")
@@ -110,11 +109,11 @@ class Ui_Form(object):
         font.setPointSize(11)
         self.cfpassword.setFont(font)
         self.cfpassword.setStyleSheet("background-color: rgba(0, 0, 0, 0);\n"
-"border:none;\n"
-"border-bottom:2px solid qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(44, 42, 42, 255), stop:0.5 rgba(7, 46, 51, 255), stop:1 rgba(12, 112, 117, 255));\n"
-"    \n"
-"color:rgba(0, 0, 0, 240);\n"
-"padding-bottom:7px;")
+                                      "border:none;\n"
+                                      "border-bottom:2px solid qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(44, 42, 42, 255), stop:0.5 rgba(7, 46, 51, 255), stop:1 rgba(12, 112, 117, 255));\n"
+                                      "    \n"
+                                      "color:rgba(0, 0, 0, 240);\n"
+                                      "padding-bottom:7px;")
         self.cfpassword.setEchoMode(QtWidgets.QLineEdit.Password)
         self.cfpassword.setObjectName("cfpassword")
         self.selectuser = QtWidgets.QComboBox(self.widget)
@@ -125,48 +124,48 @@ class Ui_Form(object):
         font.setItalic(False)
         self.selectuser.setFont(font)
         self.selectuser.setStyleSheet("QComboBox {\n"
-"    border: 1px solid #fffff0; \n"
-"    border-radius: 5px; /* Border radius to create curved edges */\n"
-"    padding: 5px;\n"
-"    background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(12, 112, 117, 255), stop:0.5 rgba(9, 113, 114, 255), stop:1 rgba(101, 161, 185, 255));\n"
-"    selection-background-color: #45a059; /* Background color when selected */\n"
-"    color: white; /* Text color */\n"
-"}\n"
-"\n"
-"QComboBox::drop-down {\n"
-"    subcontrol-origin: padding;\n"
-"    subcontrol-position: top right;\n"
-"    width: 15px;\n"
-"    border-left-width: 0px;\n"
-"    border-left-color: darkgray;\n"
-"    border-left-style: solid; /* creates triangle */\n"
-"    border-top-right-radius: 5px; /* Adjust as needed for curved corner */\n"
-"    border-bottom-right-radius: 5px; /* Adjust as needed for curved corner */\n"
-"    margin-right: 5px; /* Move arrow a little bit to the left */\n"
-"}\n"
-"\n"
-"QComboBox::down-arrow {\n"
-"    image:url(:/images/down-arrow.png); /* Custom arrow icon */\n"
-"    height:25px;\n"
-"    width: 30px;\n"
-"    margin-right: 7px;\n"
-"    margin-top: 7px;\n"
-"}\n"
-"\n"
-"QComboBox::down-arrow:on {\n"
-"    /* Rotate arrow when dropdown is opened */\n"
-"    transform: rotate(180deg);\n"
-"}\n"
-"\n"
-"QComboBox::item {\n"
-"    height: 25px;\n"
-"}\n"
-"\n"
-"QComboBox::item:selected {\n"
-"    background-color: #45a059;\n"
-"    color: white;\n"
-"}\n"
-"")
+                                      "    border: 1px solid #fffff0; \n"
+                                      "    border-radius: 5px; /* Border radius to create curved edges */\n"
+                                      "    padding: 5px;\n"
+                                      "    background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(12, 112, 117, 255), stop:0.5 rgba(9, 113, 114, 255), stop:1 rgba(101, 161, 185, 255));\n"
+                                      "    selection-background-color: #45a059; /* Background color when selected */\n"
+                                      "    color: white; /* Text color */\n"
+                                      "}\n"
+                                      "\n"
+                                      "QComboBox::drop-down {\n"
+                                      "    subcontrol-origin: padding;\n"
+                                      "    subcontrol-position: top right;\n"
+                                      "    width: 15px;\n"
+                                      "    border-left-width: 0px;\n"
+                                      "    border-left-color: darkgray;\n"
+                                      "    border-left-style: solid; /* creates triangle */\n"
+                                      "    border-top-right-radius: 5px; /* Adjust as needed for curved corner */\n"
+                                      "    border-bottom-right-radius: 5px; /* Adjust as needed for curved corner */\n"
+                                      "    margin-right: 5px; /* Move arrow a little bit to the left */\n"
+                                      "}\n"
+                                      "\n"
+                                      "QComboBox::down-arrow {\n"
+                                      "    image:url(:/images/down-arrow.png); /* Custom arrow icon */\n"
+                                      "    height:25px;\n"
+                                      "    width: 30px;\n"
+                                      "    margin-right: 7px;\n"
+                                      "    margin-top: 7px;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QComboBox::down-arrow:on {\n"
+                                      "    /* Rotate arrow when dropdown is opened */\n"
+                                
+                                      "}\n"
+                                      "\n"
+                                      "QComboBox::item {\n"
+                                      "    height: 25px;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QComboBox::item:selected {\n"
+                                      "    background-color: #45a059;\n"
+                                      "    color: white;\n"
+                                      "}\n"
+                                      "")
         self.selectuser.setEditable(False)
         self.selectuser.setMaxVisibleItems(3)
         self.selectuser.setInsertPolicy(QtWidgets.QComboBox.InsertAtTop)
@@ -181,11 +180,11 @@ class Ui_Form(object):
         self.line = QtWidgets.QLabel(self.widget)
         self.line.setGeometry(QtCore.QRect(420, 340, 381, 20))
         self.line.setStyleSheet("background-color: rgba(0, 0, 0, 0);\n"
-"border:none;\n"
-"border-bottom:2px solid qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(44, 42, 42, 255), stop:0.5 rgba(7, 46, 51, 255), stop:1 rgba(12, 112, 117, 255));\n"
-"    \n"
-"color:rgba(0, 0, 0, 240);\n"
-"padding-bottom:7px;")
+                                "border:none;\n"
+                                "border-bottom:2px solid qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(44, 42, 42, 255), stop:0.5 rgba(7, 46, 51, 255), stop:1 rgba(12, 112, 117, 255));\n"
+                                "    \n"
+                                "color:rgba(0, 0, 0, 240);\n"
+                                "padding-bottom:7px;")
         self.line.setText("")
         self.line.setObjectName("line")
         self.resgister_button = QtWidgets.QPushButton(self.widget)
@@ -197,21 +196,21 @@ class Ui_Form(object):
         font.setWeight(50)
         self.resgister_button.setFont(font)
         self.resgister_button.setStyleSheet("QPushButton#resgister_button {\n"
-"    background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(44, 42, 42, 255), stop:0.5 rgba(7, 46, 51, 255), stop:1 rgba(12, 112, 117, 255));\n"
-"    color: rgba(255, 255, 255, 210);\n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QPushButton#resgister_button:hover {\n"
-"    background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(12, 112, 117, 255), stop:0.5 rgba(9, 113, 114, 255), stop:1 rgba(101, 161, 185, 255));\n"
-"}\n"
-"\n"
-"QPushButton#resgister_button:pressed {\n"
-"    padding-left: 5px;\n"
-"    padding-top: 5px;\n"
-"    background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(101, 161, 185, 255), stop:0.5 rgba(40, 77, 95, 255), stop:1 rgba(44, 42, 42, 255));\n"
-"}\n"
-"")
+                                            "    background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(44, 42, 42, 255), stop:0.5 rgba(7, 46, 51, 255), stop:1 rgba(12, 112, 117, 255));\n"
+                                            "    color: rgba(255, 255, 255, 210);\n"
+                                            "    border-radius: 5px;\n"
+                                            "}\n"
+                                            "\n"
+                                            "QPushButton#resgister_button:hover {\n"
+                                            "    background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(12, 112, 117, 255), stop:0.5 rgba(9, 113, 114, 255), stop:1 rgba(101, 161, 185, 255));\n"
+                                            "}\n"
+                                            "\n"
+                                            "QPushButton#resgister_button:pressed {\n"
+                                            "    padding-left: 5px;\n"
+                                            "    padding-top: 5px;\n"
+                                            "    background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(101, 161, 185, 255), stop:0.5 rgba(40, 77, 95, 255), stop:1 rgba(44, 42, 42, 255));\n"
+                                            "}\n"
+                                            "")
 
         self.resgister_button.setObjectName("resgister_button")
         self.alregister = QtWidgets.QLabel(self.widget)
@@ -230,7 +229,7 @@ class Ui_Form(object):
         self.logdirect.setObjectName("logdirect")
         '''self.logdirect.mousePressEvent = self.redirect_to_login'''
 
- # Add minimize and close buttons
+        # Add minimize and close buttons
         self.minimize_button = QtWidgets.QPushButton(Form)
         self.minimize_button.setGeometry(QtCore.QRect(870, 10, 30, 30))
         self.minimize_button.setObjectName("minimize_button")
@@ -251,7 +250,7 @@ class Ui_Form(object):
         background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(101, 161, 185, 255), stop:0.5 rgba(40, 77, 95, 255), stop:1 rgba(44, 42, 42, 255));
     }
 """)
-        
+
         self.close_button = QtWidgets.QPushButton(Form)
         self.close_button.setGeometry(QtCore.QRect(900, 10, 30, 30))
         self.close_button.setObjectName("close_button")
@@ -316,11 +315,69 @@ class Ui_Form(object):
         login_window = LoginWindow()
         Form.hide()
         login_window.show()'''
+ 
+# Add the register_button.clicked.connect method to call the register_user function
+def register_user(self):
+    # Function to register a new user
+    first_name = self.first_name.text()
+    last_name = self.last_name.text()
+    email = self.email.text()
+    password = self.password.text()
+    confirm_password = self.cfpassword.text()
+    user_type = self.selectuser.currentText()  # Assuming 'Faculty' or 'Student'
+    self.register_button.clicked.connect(self.register_user)
+    # Check if any field is empty
+    if not (first_name and last_name and email and password and confirm_password):
+        QtWidgets.QMessageBox.warning(self, "Error", "Please fill in all fields.")  # Use self instead of Form
+        return
 
-if __name__== "__main__":
-        app = QtWidgets.QApplication(sys.argv)
-        Form = QtWidgets.QWidget()
-        ui=Ui_Form()
-        ui.setupUi(Form)
-        Form.show()
-        sys.exit(app.exec_())
+    # Check if password and confirm password match
+    if password != confirm_password:
+        QtWidgets.QMessageBox.warning(self, "Error", "Passwords do not match.")  # Use self instead of Form
+        return
+        # Connect to the database
+    conn = sqlite3.connect('timetable.db')
+    cursor = conn.cursor()
+
+    
+    try:
+        # Insert user data into the database
+        cursor.execute('''
+            INSERT INTO Users (username, password_hash, first_name, last_name, email)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (email, password, first_name, last_name, email))
+
+        # Commit changes
+        conn.commit()
+
+        # Optionally, display a message box indicating successful registration
+        QtWidgets.QMessageBox.information(self, "Success", "Registration successful!")
+
+        # Clear input fields after registration
+        self.first_name.clear()
+        self.last_name.clear()
+        self.email.clear()
+        self.password.clear()
+        self.cfpassword.clear()
+
+        # Optionally, switch to the login window after successful registration
+        login_window = LoginWindow()  # Assuming LoginWindow is defined somewhere
+        Form.hide()
+        login_window.show()
+
+    except sqlite3.Error as e:
+        # Handle database errors
+        QtWidgets.QMessageBox.warning(self, "Error", "Database error: " + str(e))
+
+    finally:
+        # Close the database connection
+        conn.close()
+
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
